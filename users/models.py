@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-from mailing.models import NULLABLE
+NULLABLE = {"blank": True, "null": True}
 
 
 class User(AbstractUser):
@@ -24,4 +24,6 @@ class User(AbstractUser):
     class Meta:
         verbose_name = 'пользователь'
         verbose_name_plural = 'пользователи'
-        permissions = []
+        permissions = [
+            ('change_user_status', 'Может менять статус пользователей'),
+        ]

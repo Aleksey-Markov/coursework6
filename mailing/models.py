@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 
+from users.models import User
+
 NULLABLE = {'blank': True, 'null': True}
 
 
@@ -47,6 +49,7 @@ class Newsletter(models.Model):
     status = models.CharField(max_length=25, choices=mail_status, default='active', verbose_name='Статус рассылки')
     mail = models.ForeignKey(Mail, on_delete=models.CASCADE, verbose_name='Сообщение рассылки')
     client = models.ManyToManyField(Client, verbose_name='Клиент')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='пользователь', **NULLABLE)
 
     def __str__(self):
         return self.title
