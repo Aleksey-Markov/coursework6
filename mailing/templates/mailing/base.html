@@ -1,0 +1,21 @@
+{% load static %}
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <script src="{% static 'js/color-modes.js' %}"></script>
+
+    <meta charset="utf-8">
+    <title>Печкин</title>
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/offcanvas-navbar.css' %}" rel="stylesheet">
+</head>
+{% block content %}
+{% endblock %}
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+<script src="{% static 'js/offcanvas-navbar.js' %}"></script>
+</html>

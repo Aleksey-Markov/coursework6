@@ -1,0 +1,29 @@
+{% extends 'mailing/base.html' %}
+{% block content%}
+<div class="row text-center">
+    <div class="col-6">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                {% if object %}
+                <h3 class="my-0 fw-normal">{{ object.email }}</h3>
+                {% else %}
+                <h3 class="card-title">Регистрация</h3>
+                {% endif%}
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p}}
+                        <button type="submit" class="btn btn-primary">
+                            {% if object %}
+                            Принять
+                            {% else %}
+                            Зарегистрироваться
+                            {% endif%}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}
