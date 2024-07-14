@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
 
+from blog.models import Blog
 from mailing.forms import NewsletterForm, NewsletterManagerForm
 from mailing.models import Newsletter, Attempt, Mail, Client
 
@@ -24,8 +25,8 @@ class NewsletterDetailView(LoginRequiredMixin, DetailView):
 
 class NewsletterCreateView(LoginRequiredMixin, CreateView):
     model = Newsletter
-    fields = ['name', 'mail', 'start_time', 'interval', 'status', 'client']
-    success_url = reverse_lazy('mailing:list')
+    fields = ['title', 'mail', 'start_time', 'interval', 'status', 'client']
+    success_url = reverse_lazy('mailing:home')
 
     def form_valid(self, form):
         m_ps = form.save()
@@ -106,4 +107,4 @@ def index_data(request):
                'random_blogs': random_blogs,
                }
 
-    return render(request, 'mailing/index.html', context)
+    return render(request, 'mailing/newsletter_list.html', context)

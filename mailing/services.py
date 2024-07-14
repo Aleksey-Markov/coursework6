@@ -11,7 +11,7 @@ from django.utils import timezone
 
 from blog.models import Blog
 from config.settings import CACHE_ENABLED
-from mailing.models import Newsletter, Attempt
+from mailing.models import Newsletter, Attempt, Client
 
 
 def start():
@@ -23,20 +23,20 @@ def start():
 def send_mailing():
     zone = pytz.timezone(settings.TIME_ZONE)
     current_datetime = datetime.now(zone)
-    # проверка статуса активных рассылок  и если дата завершения прошла меняем статус на завершенную
+
     print('начало проверки дат окончания активных рассылок')
     for mailing in Newsletter.objects.all():
-        if mailing.start_time > current_datetime and mailing.status == 'is_active':
-            mailing.status = ['finished_date']
+        if mailing.start_time > current_datetime and mailing.status == 'send':
+            mailing.status = ['ended']
             mailing.save()
 
     mailings = (
-        Newsletter.objects.filter(start_time__lte=current_datetime).filter(status__in=['is_active']).filter(
+        Newsletter.objects.filter(start_time__lte=current_datetime).filter(status__in=['send']).filter(
             next_date__lte=current_datetime))
 
     for mailing in mailings:
 
-        rl = [client_.email for client_ in mailing.client.all()]
+        rl = [client_.email for client_ in mailing.Client.all()]
         server_response = ''
         status = False
         try:

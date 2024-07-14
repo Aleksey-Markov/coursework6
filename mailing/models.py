@@ -58,6 +58,12 @@ class Newsletter(models.Model):
     class Meta:
         verbose_name = 'Рассылка'
         verbose_name_plural = 'Рассылки'
+        permissions =[
+            ('change_newsletter_status', 'Может менять статус рассылок'),
+            ('view_newsletter_details', 'Может просматривать детали рассылок'),
+            ('can_users_out', 'Может отключать пользователей'),
+            ('view_newsletter_users', 'Может просматривать пользователей'),
+        ]
 
 
 class Attempt(models.Model):

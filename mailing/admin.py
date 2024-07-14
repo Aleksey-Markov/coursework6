@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from mailing.models import Mail, Newsletter, Attempt
+from mailing.models import Mail, Newsletter, Attempt, Client
 
 
 @admin.register(Mail)
@@ -18,3 +18,9 @@ class NewsletterAdmin(admin.ModelAdmin):
 @admin.register(Attempt)
 class AttemptAdmin(admin.ModelAdmin):
     list_display = ('id', 'last_attempt_date', 'attempt_status', 'attempt_response', 'newsletter')
+
+
+@admin.register(Client)
+class ClientAdmin(admin.ModelAdmin):
+    list_display = ('email', 'name')
+    

@@ -43,7 +43,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Создать рассылку</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'mailing:create' %}">Создать рассылку</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'users:logout' %}">Выход</a>
@@ -89,26 +89,15 @@
     <div class="my-3 p-3 bg-body rounded shadow-sm">
         <h4 class="border-bottom pb-2 mb-0">Блог</h4>
         <div class="d-flex text-body-secondary pt-3">
+            {% for object in random_blogs %}
             <p class="pb-3 mb-0 small lh-sm border-bottom">
-                <strong class="d-block text-gray-dark">Статья блога</strong>
-                Содержимое
+
+                <strong class="d-block text-gray-dark">{{ object.title}}</strong>
+                {{ object.text }}
             </p>
         </div>
-        <div class="d-flex text-body-secondary pt-3">
-            <p class="pb-3 mb-0 small lh-sm border-bottom">
-                <strong class="d-block text-gray-dark">Статья блога</strong>
-                Содержимое
-            </p>
-        </div>
-        <div class="d-flex text-body-secondary pt-3">
-            <p class="pb-3 mb-0 small lh-sm border-bottom">
-                <strong class="d-block text-gray-dark">Статья блога</strong>
-                Содержимое
-            </p>
-        </div>
-        <small class="d-block text-end mt-3">
-            <a href="#">All updates</a>
-        </small>
+
+        {% endfor %}
     </div>
 
     <div class="my-3 p-3 bg-body rounded shadow-sm">
