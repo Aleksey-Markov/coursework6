@@ -36,7 +36,7 @@ def send_mailing():
 
     for mailing in mailings:
 
-        rl = [client_.email for client_ in mailing.Client.all()]
+        rl = [client_.email for client_ in mailing.client.all()]
         server_response = ''
         status = False
         try:
