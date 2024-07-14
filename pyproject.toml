@@ -16,6 +16,7 @@ flake8 = "^7.1.0"
 python-dotenv = "^1.0.1"
 redis = "^5.0.7"
 pillow = "^10.4.0"
+django-apscheduler = "^0.6.2"
 
 [build-system]
 requires = ["poetry-core"]

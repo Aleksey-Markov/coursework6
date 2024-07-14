@@ -1,0 +1,35 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+<div class="mb-3">
+    <a href="{% url 'mailing:message_create' %}" class="w-100 btn btn-lg btn-outline-primary">Создать сообщение</a>
+</div>
+
+<div class="col">
+    <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-header py-3 text-center">
+            {% if object %}
+            <h4 class="my-0 fw-normal">{{ object.title }}</h4>
+            {% else %}
+            <h4 class="my-0 fw-normal">Создание рассылки</h4>
+            {% endif%}
+
+        </div>
+        <div class="card-body">
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="w-100 btn btn-lg btn-outline-primary">Принять</button>
+            </form>
+
+
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'mailing:list' %}" class="w-100 btn btn-lg btn-outline-primary">Отмена</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

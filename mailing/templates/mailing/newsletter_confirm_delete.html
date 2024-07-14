@@ -1,0 +1,30 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+
+
+<div class="text-center">
+    <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">Хотие удаленить эту рассылку ?</h4>
+        </div>
+        <div class="card-body">
+            <ul class="list-unstyled mt-3 mb-4">
+                <li>Название: {{ object.title }}</li>
+                <li>Старт рассылки: {{ object.start_time }}</li>
+                <li>Интервал: {{ object.interval }}</li>
+            </ul>
+        </div>
+        <div class="card-footer">
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="w-100 btn btn-lg btn-outline-danger mb-2">Ок</button>
+                <a href="{% url 'mailing:list' %}" class="w-100 btn btn-lg btn-outline-success ">No</a>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

@@ -10,6 +10,7 @@ class Client(models.Model):
     email = models.EmailField(verbose_name='Адрес электронной почты')
     name = models.CharField(max_length=100, verbose_name='Имя клиента')
     comment = models.TextField(verbose_name='Комментарий клиента', **NULLABLE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь', **NULLABLE)
 
     def __str__(self):
         return f' Клиент: {self.email}'

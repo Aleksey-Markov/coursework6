@@ -1,0 +1,31 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+
+
+
+<div class="col">
+    <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-header py-3 text-center">
+            <h4 class="my-0 fw-normal">{{ object.title }}</h4>
+        </div>
+        <div class="card-body">
+            <ul class="list-unstyled mt-3 mb-4">
+                <li>Старт рассылки: {{ object.start_time }}</li>
+                <li>Интервал: {{ object.interval }}</li>
+                <li>Текст письма: {{ object.mail.subject }}</li>
+                <li>Содержимое письма: {{ object.mail.content }}</li>
+                <li>Клиенты: {% for client in object.client.all %} {{client.email}} {% endfor %}</li>
+            </ul>
+
+
+            
+
+            <a href="{% url 'mailing:edit' object.pk %}" type="button" class="w-100 btn btn-lg btn-outline-primary">Редактировать</a>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
