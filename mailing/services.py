@@ -26,7 +26,7 @@ def send_mailing():
 
     print('начало проверки дат окончания активных рассылок')
     for mailing in Newsletter.objects.all():
-        if mailing.start_time > current_datetime and mailing.status == 'send':
+        if mailing.start_time > current_datetime and mailing.status == 'active':
             mailing.status = ['ended']
             mailing.save()
 
@@ -57,23 +57,6 @@ def send_mailing():
                        mailing_parameters=mailing)
             print(log)
             log.save()
-
-            next_date_calculated = None
-
-            if mailing.interval == 'per_day':
-                next_date_calculated = mailing.next_date + timezone.timedelta(days=1)
-            elif mailing.interval == 'per_week':
-                next_date_calculated = mailing.next_date + timezone.timedelta(days=7)
-            elif mailing.interval == 'per_month':
-                next_date_calculated = mailing.next_date + timezone.timedelta(days=30)
-
-            if next_date_calculated > mailing.end_time:
-                if status:
-                    mailing.status = 'finished'
-                else:
-                    mailing.status = 'finished_error'
-            else:
-                mailing.next_date = next_date_calculated
 
             mailing.save()
 
